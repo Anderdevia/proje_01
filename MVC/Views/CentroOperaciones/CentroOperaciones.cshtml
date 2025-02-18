@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Centro de Operaciones</h2>
+
+<div>
+    <p>@ViewBag.Message</p>
+</div>
+<div class="my-2">
+    <button id="btnNuevo" type="button" class="smalTi" data-toggle='modal' data-target='#ModalAgregar'>Agregar Centro de Operación</button>
+</div>
+
+<div class="scroll-container">
+    <div class="content">
+        <table id="tablaCentroOperacion" class="table">
+            <thead class="thead-dark text-center">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<div class="modal fade modal" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="min-height: 100vh;" role="document">
+        <div class=" modal-content " style="width: 330px; left: 20%;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Centro de Operación</h5>
+                <button id="" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="errorMessage" class="text-danger small-textmjs" style="display:none;"></div>
+
+            <div class="modal-body text-center" style="padding-left: 25px;">
+                <form action="" id="formRegistra" style="width: 280px;" enctype="multipart/form-data">
+                    <input type="hidden" name="codigo" id="codigo" value="" />
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="nombre" placeholder="Nombre"
+                               id="nombreCentroOperacion">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" type="text" name="descripcion" placeholder="Descripción"
+                                  id="descripcionCentroOperacion" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" type="text" name="direccion" placeholder="Dirección"
+                                  id="direccionCentroOperacion" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="telefono" placeholder="Telefono"
+                               id="telefonoCentroOperacion">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="email" name="correo" placeholder="Correo" 
+                               id="correoCentroOperacion">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="file" name="Imagen" placeholder="Imagen"
+                               id="imagenCentroOperacion">
+                    </div>
+                    <div class="modal-footer">
+                        <button id="registrar" class="form-control btn btn-primary" type="submit">Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal" id="ModalActualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="min-height: 100vh;" role="document">
+        <div class=" modal-content " style="width: 330px; left: 20%;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Centro de Operación</h5>
+                <button id="" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="errorMessageA" class="text-danger small-textmjs" style="display:none;"></div>
+
+            <div class="modal-body text-center" style="padding-left: 25px;">
+                <form action="" id="formActualiza" style="width: 280px;" enctype="multipart/form-data">
+                    <input type="hidden" name="codigo" id="codigoA" />
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="nombre" placeholder="Nombre"
+                               id="nombreCentroOperacionA">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" type="text" name="descripcion" placeholder="Descripción"
+                                  id="descripcionCentroOperacionA" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" type="text" name="direccion" placeholder="Dirección"
+                                  id="direccionCentroOperacionA" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="telefono" placeholder="Telefono" 
+                               id="telefonoCentroOperacionA">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="email" name="correo" placeholder="Correo"
+                               id="correoCentroOperacionA">
+                    </div>
+
+                    <div class="form-group">
+                        <input class="form-control" type="file" name="Imagen" placeholder="Imagen"
+                               id="imagenCentroOperacionA">
+                        <br />
+                        <div id="foto" style="width: 100%;">
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <input class="form-control" type="hidden" name="nombreRutaA" placeholder="NombreRutaA"
+                               id="nombreRutaA">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button id="actualizar" class="form-control btn btn-primary" type="submit">Actualizar</button>
+                    </div>
+
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+<style>
+    .text-center {
+        text-align: center;
+    }
+
+    /* Estilo del contenedor */
+    .scroll-container {
+        overflow-y: auto; 
+        border: 1px solid #ccc; 
+        padding: 10px;
+    }
+
+    .content {
+        height: 100%;
+    }
+
+</style>
+
+
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<script src="~/Scripts/CentroOperacion/Crear.js"></script>
+<script src="~/Scripts/_LayaoutAdmin/_LayaoutAdmin.js"></script>

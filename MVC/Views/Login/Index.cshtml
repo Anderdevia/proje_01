@@ -1,0 +1,53 @@
+﻿
+
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Login.cshtml"; 
+    
+    }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/estillos.css">
+
+
+</head>
+<body>
+    @{ if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-danger">@ViewBag.Message</div> } }
+
+    <section>
+        <div class="general">
+            <div class="user singinBox">
+                <div class="imgBx"><img src="~/img_sistema/login2.png" alt="Login"></div>
+                <div class="formBx">
+                    <form action="@Url.Action()" id="formAccede">
+                        <h2>Inicia Sesion</h2>
+                        <input id="usuario" type="text" value="" name="correo" placeholder="&#128272; Usuario">
+                        <input id="password" type="password" name="contraseña" placeholder="&#128273; Contraseña">
+                        <input id="ingresar" type="submit" value="Ingresar">
+                    </form>
+             
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+    function toggleForm() {
+            var container = document.querySelector('.general');
+            container.classList.toggle("active");
+        }
+    </script>
+
+
+</body>
+</html>
+<!-- Bootstrap core JavaScript-->
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+
+

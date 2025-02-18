@@ -1,0 +1,406 @@
+﻿@model BE.Clientes
+
+@{
+    ViewBag.Title = "AccederLogin";
+    Layout = null;
+}
+<title>@ViewBag.Nombre_Login | Login</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/estillos.css">
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</head>
+<body>
+
+
+    <section>
+        <div class="general">
+            <div class="user singinBox">
+                <div class="imgBx"><img src="~/img_sistema/login2.png" alt="Login"></div>
+                <div class="formBx">
+
+
+                    <form action="@Url.Action()" id="formAccede" method="post">
+                        @{
+                            if (!string.IsNullOrEmpty(ViewBag.Message))
+                            {
+                                <div id="alertDiv" class="alert alert-danger alertDiv">@ViewBag.Message</div>
+                            }
+                        }
+                        <h2>Inicio de Cliente</h2>
+
+
+                        <input id="usuario" type="text" name="correo" value="" placeholder="&#128272; Usuario">
+                        <input id="password" type="password" name="contraseña" value="" placeholder="&#128273; Contraseña">
+
+
+                        <input style="color: #ececec;" id="ingresar" type="submit" value="Ingresar">
+
+                        <p class="signup">No tienes cuenta? <a href="#" onclick="toggleForm()">Registrate</a></p>
+                    </form>
+
+
+                </div>
+            </div>
+
+            <div class="user singupBx">
+                <div class="formBx">
+                    <form id="formRegistra">
+                        <h2 class="text-center mb-4">Nuevo Cliente</h2>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-3" style="padding-top: 7px;  padding-bottom: 7px;">
+                                <select class="form-control" id="localidadSelect" required>  </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" id="usuarioRegistro" name="usuarioRegistro" placeholder="Usuario" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="password" class="form-control" id="contraseñaRegistro" name="contraseñaRegistro" placeholder="Contraseña" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="password" class="form-control" id="u_contraseña2" name="u_contraseña2" placeholder="Confirmar Contraseña" required>
+                            </div>
+                        </div>
+
+                        <div id="errorMessage" class="text-danger text-center mb-3"></div> <!-- Mensaje de error -->
+
+
+                        <div class="d-grid">
+                            <input type="submit" style="color: #ececec;" class="btn btn-primary" name="registrar" value="Registrarse">
+                        </div>
+
+                        <p class="text-center mt-3">
+                            ¿Ya tienes una cuenta? <a href="#" onclick="toggleForm()">Iniciar sesión</a>
+                        </p>
+                    </form>
+                </div>
+                <div class="imgBx"><img src="~/img_sistema/registro2.png" alt="Registro"></div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+    <!-- Modal Habeas Data -->
+    <div id="habeasDataModal" class="habeas-modal">
+        <div class="habeas-modal-dialog">
+            <div class="habeas-modal-content">
+                <div class="habeas-modal-header">
+                    <h5 class="habeas-modal-title">Tratamiento de Datos Personales</h5>
+                </div>
+
+                <div class="habeas-modal-body">
+                    <div class="habeas-documento">
+                        <h6>Política de Protección de Datos</h6>
+                        <p>
+                            En cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013, le informamos que sus datos serán tratados
+                            con estricta confidencialidad. Los datos proporcionados serán utilizados exclusivamente para...
+                        </p>
+                        <p>
+                            Al aceptar este documento, usted autoriza el tratamiento de sus datos conforme a la política de privacidad
+                            establecida en este documento.
+                        </p>
+                        <h6>Finalidad del Tratamiento</h6>
+                        <p>
+                            Los datos personales serán utilizados para las siguientes finalidades:
+                            <ul>
+                                <li>Gestionar su inscripción en nuestra plataforma.</li>
+                                <li>Enviar información relevante sobre nuestros servicios.</li>
+                                <li>Mejorar la experiencia del usuario dentro de la plataforma.</li>
+                            </ul>
+                        </p>
+                        <h6>Derechos del Titular</h6>
+                        <p>
+                            Como titular de los datos, usted tiene derecho a acceder, actualizar, rectificar y solicitar la eliminación de sus datos personales...
+                        </p>
+                        <p>
+                            Para más información, consulte nuestra <a href="#">política de privacidad</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="habeas-modal-footer">
+                    <button type="button" class="btn btn-danger btn-lg" id="rechazarHabeas">
+                        <i class="fas fa-times-circle"></i> Rechazar
+                    </button>
+                    <button type="button" class="btn btn-success btn-lg" id="aceptarHabeas">
+                        <i class="fas fa-check-circle"></i> Aceptar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+
+
+
+        function cboZona() {
+
+
+            let baseUrl = window.location.origin; 
+            let endpoint = "/Login/GetComboZona"; 
+
+            if (baseUrl.includes("/Login")) {
+                endpoint = "/GetComboZona"; 
+            }
+
+
+            $.ajax({
+                url: baseUrl + endpoint,
+                type: "GET",
+                dataType: "json",
+                success: function (miJson) {
+
+
+
+                    let select = document.getElementById("localidadSelect");
+                    select.innerHTML = "";
+
+                    let defaultOption = document.createElement("option");
+                    defaultOption.value = "";
+                    defaultOption.textContent = "Seleccione una Zona...";
+                    defaultOption.disabled = true;  
+                    select.appendChild(defaultOption);
+
+                    miJson.forEach(localidad => {
+                        let option = document.createElement("option");
+                        option.value = localidad.Id;
+                        option.textContent = localidad.Nombre;
+                        select.appendChild(option);
+                    });
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error: " + error);
+                }
+            });
+
+
+
+        }
+
+        function toggleForm() {
+
+            document.getElementById("nombre").value = "";
+            document.getElementById("correo").value = "";
+            document.getElementById("usuarioRegistro").value = "";
+            document.getElementById("contraseñaRegistro").value = "";
+            document.getElementById("u_contraseña2").value = "";
+            document.getElementById("errorMessage").textContent = ""; 
+            let select = document.getElementById("localidadSelect");
+            select.innerHTML = "";
+
+            let defaultOption = document.createElement("option");
+            defaultOption.value = "";
+            defaultOption.textContent = "Seleccione una Zona...";
+            defaultOption.disabled = true;  
+            defaultOption.selected = true;  
+            select.appendChild(defaultOption);
+
+            var container = document.querySelector('.general');
+            container.classList.toggle("active");
+
+            cboZona();
+        }
+
+        document.getElementById("formRegistra").addEventListener("submit", function (event) {
+            event.preventDefault(); 
+
+            let nombre = document.getElementById("nombre").value.trim();
+            let correo = document.getElementById("correo").value.trim();
+            let localidad = document.getElementById("localidadSelect").value.trim();
+            let usuario = document.getElementById("usuarioRegistro").value.trim();
+            let contraseña = document.getElementById("contraseñaRegistro").value;
+            let confirmarContraseña = document.getElementById("u_contraseña2").value;
+            let errorMessage = document.getElementById("errorMessage");
+
+            if (!nombre || !correo || !localidad || !usuario || !contraseña || !confirmarContraseña) {
+                errorMessage.textContent = "Todos los campos son obligatorios.";
+                return;
+            }
+
+            if (contraseña !== confirmarContraseña) {
+                errorMessage.textContent = "Las contraseñas no coinciden.";
+                return;
+            }
+
+            if (contraseña.length < 6) {
+                errorMessage.textContent = "La contraseña debe tener al menos 6 caracteres.";
+                return;
+            }
+
+            errorMessage.textContent = "";
+
+            let modal = document.getElementById("habeasDataModal");
+            modal.style.display = "block";
+
+        });
+
+
+        document.getElementById("aceptarHabeas").addEventListener("click", function () {
+            let modal = document.getElementById("habeasDataModal");
+            modal.style.display = "none";
+
+            enviarCliente();
+        });
+
+
+        document.getElementById("rechazarHabeas").addEventListener("click", function () {
+            let modal = document.getElementById("habeasDataModal");
+
+            modal.classList.remove("show");
+
+            setTimeout(() => {
+                modal.style.display = "none";
+                document.body.classList.remove("modal-open");
+            }, 200); 
+        });
+
+
+        window.onclick = function (event) {
+            let modal = document.getElementById("habeasDataModal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+
+
+
+        function enviarCliente() {
+            let nombre = document.getElementById("nombre").value.trim();
+            let correo = document.getElementById("correo").value.trim();
+            let localidad = document.getElementById("localidadSelect").value.trim();
+            let usuario = document.getElementById("usuarioRegistro").value.trim();
+            let contraseña = document.getElementById("contraseñaRegistro").value;
+
+            var nuevoCliente = {
+                Nombre: nombre,
+                Correo: correo,
+                Zona: localidad,
+                UsuarioLogin: usuario,
+                Contraseña: contraseña,
+                HabeasData: 1,
+                IdRol: 1
+            };
+
+
+
+            let baseUrl = window.location.origin;
+            let endpoint = "/Login/NuevoCliente";
+
+            if (baseUrl.includes("/Login")) {
+                endpoint = "/NuevoCliente";
+            }
+
+
+
+            $.ajax({
+                url: baseUrl + endpoint,
+                type: 'POST',
+                cache: false,
+                data: {
+                    cliente: nuevoCliente
+                },
+                dataType: 'json'
+            }).done(function (res) {
+                if (res.success) {
+
+                    document.getElementById("formRegistra").reset();
+
+                    let select = document.getElementById("localidadSelect");
+                    select.innerHTML = "";
+
+                    let defaultOption = document.createElement("option");
+                    defaultOption.value = "";
+                    defaultOption.textContent = "Seleccione una Zona...";
+                    defaultOption.disabled = true;
+                    defaultOption.selected = true;
+                    select.appendChild(defaultOption);
+
+                    $("#usuario").val(usuario);
+                    $("#password").val(contraseña);
+                    var container = document.querySelector('.general');
+                    container.classList.toggle("active");
+
+                    Swal.fire({
+                        position: 'top',
+                        icon: 'success',
+                        title: 'Cliente registrado correctamente',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                } else {
+
+                    errorMessage.textContent = "No se puede registrar el usuario: " + usuario +" porque ya está existe. ";
+
+
+                }
+            }).fail(function (res) {
+                Swal.fire({
+                    position: 'top',
+                    icon: 'error',
+                    title: 'Hubo un problema con el servidor',
+                    showConfirmButton: true
+                });
+            });
+        }
+
+
+    </script>
+
+
+
+</body>
+</html>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("alertDiv").style.display = "block";
+
+        // Cambiar el color a rojo y desaparecer después de 3 segundos (3000 milisegundos)
+        setTimeout(function () {
+            document.getElementById("alertDiv").style.display = "none";
+            $('#usuario').val(null);
+        }, 3000);
+    });
+</script>

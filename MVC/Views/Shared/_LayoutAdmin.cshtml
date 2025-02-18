@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin</title>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <link href="~/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="~/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css" />
+
+
+
+</head>
+
+<body style="padding-top: 0px; padding-bottom: 0px;" id="page-top">
+
+    <div id="wrapper">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="~/CentroOperaciones/FiltroFecha">
+                <div class="sidebar-brand-icon rotate-n-1">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">@Session["Usuario"]<sup></sup></div>
+                <input type="hidden" id="IdUsuario"/>
+                <input type="hidden" id="IdCentroOperacion"/>
+                <input type="hidden" id="Modulo"/>
+            </a>
+
+            <hr class="sidebar-divider my-0">
+
+            <li class="nav-item ">
+                <a class="nav-link fas fa-fw fa-home" href="~/CentroOperaciones/FiltroFecha"> Home</a>
+
+            </li>
+
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Módulos
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                   aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Administrador</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <div id="menuadmin" class="">
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-heading">
+
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTree"
+                   aria-expanded="true" aria-controls="collapseTree">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Centros de Operaciones</span>
+                </a>
+                <div id="collapseTree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <div id="menuCentrosOperaciones" class="" style="padding-left: 15px;">
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider">
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseFour"
+                   aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Informes</span>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <div id="menuInformes" class="" style="padding-left: 15px;">
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider">
+            <!-- Nav Item - Tables -->
+
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Salir</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+
+
+        </ul>
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <div id="content">
+
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <ul class="navbar-nav ml-auto">
+
+                        
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@Session["Usuario"]</span>
+                                <img class="img-profile rounded-circle"
+                                     src="~/admin/img/undraw_profile.svg">
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Perfil
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Configuración
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Salir
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+
+            </div>
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>
+                            Copyright &copy; PRUEBA TECNICA - O&S - APLICACIONES Y BBDD - WINNER GROUP S.A Febrero del 2025 | Por Anderson Devia
+                        </span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+    </div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Desea salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+             
+                    @Html.ActionLink("Cerrar Sesion", "CerrarSesion", "Login", new { }, new { @class = "btn btn-primary", @id = "cerrarsesion" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal Habeas Data -->
+    <div id="habeasDataModalModulo" class="habeas-modal">
+        <div class="habeas-modal-dialog">
+            <div class="habeas-modal-content">
+                <div class="habeas-modal-header">
+                    <h5 class="habeas-modal-title">Tratamiento de Datos Personales</h5>
+                </div>
+
+                <div class="habeas-modal-body">
+                    <div class="habeas-documento">
+                        <h6>Política de Protección de Datos</h6>
+                        <p>
+                            En cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013, le informamos que sus datos serán tratados
+                            con estricta confidencialidad. Los datos proporcionados serán utilizados exclusivamente para...
+                        </p>
+                        <p>
+                            Al aceptar este documento, usted autoriza el tratamiento de sus datos conforme a la política de privacidad
+                            establecida en este documento.
+                        </p>
+                        <h6>Finalidad del Tratamiento</h6>
+                        <p>
+                            Los datos personales serán utilizados para las siguientes finalidades:
+                            <ul>
+                                <li>Gestionar su inscripción en nuestra plataforma.</li>
+                                <li>Enviar información relevante sobre nuestros servicios.</li>
+                                <li>Mejorar la experiencia del usuario dentro de la plataforma.</li>
+                            </ul>
+                        </p>
+                        <h6>Derechos del Titular</h6>
+                        <p>
+                            Como titular de los datos, usted tiene derecho a acceder, actualizar, rectificar y solicitar la eliminación de sus datos personales...
+                        </p>
+                        <p>
+                            Para más información, consulte nuestra <a href="#">política de privacidad</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="habeas-modal-footer">
+                    <button type="button" class="btn btn-danger btn-lg" id="rechazarHabeasModulo">
+                        <i class="fas fa-times-circle"></i> Rechazar
+                    </button>
+                    <button type="button" class="btn btn-success btn-lg" id="aceptarHabeasModulo">
+                        <i class="fas fa-check-circle"></i> Aceptar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="~/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/admin/js/sb-admin-2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+    <script src="~/Scripts/_LayaoutAdmin/_LayaoutAdmin.js"></script>
+
+</body>
+
+</html>
+
